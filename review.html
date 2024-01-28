@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Repair Reviews</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #4CAF50;
+        }
+
+        #reviewList {
+            list-style: none;
+            padding: 0;
+        }
+
+        .review {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1> Repair Reviews</h1>
+    </header>
+    
+    <main>
+        <h2>Customer Reviews</h2>
+        <ul id="reviewList"></ul>
+
+        <form id="reviewForm">
+            <textarea id="reviewText" placeholder="Enter user_id"></textarea>
+
+            <textarea id="reviewText" placeholder="Write your review..."></textarea>
+            <button type="button" onclick="addReview()">Submit Review</button>
+        </form>
+    </main>
+
+    <script>
+        function addReview() {
+            var reviewText = document.getElementById('reviewText').value;
+            if (reviewText.trim() !== '') {
+                var reviewList = document.getElementById('reviewList');
+                var li = document.createElement('li');
+                li.className = 'review';
+                li.textContent = reviewText;
+                reviewList.appendChild(li);
+                document.getElementById('reviewText').value = '';
+            } else {
+                alert('Please enter a review before submitting.');
+            }
+        }
+    </script>
+</body>
+</html>

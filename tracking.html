@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Service Request</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('images/faded_track.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        #engineerMarker {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff6347;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+        }
+
+        #status {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #ff6347;
+            font-weight: 700;
+        }
+
+        #updateButton {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #requestIdInput {
+            padding: 10px;
+            font-size: 18px;
+        }
+
+        #submitBtn {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Track Your Service Request</h1>
+    </header>
+
+    <main>
+        <div>
+            <label for="requestIdInput">Enter Request ID:</label>
+            <input type="text" id="requestIdInput" placeholder="Request ID">
+            <button id="submitBtn" onclick="submitRequest()">Submit</button>
+        </div>
+
+        <div id="map">
+            <div id="engineerMarker"></div>
+        </div>
+
+        <div id="status">Engineer is currently at: <span id="currentLocation">Loading...</span></div>
+    </main>
+
+    <script>
+        let currentLocation = { x: 50, y: 50 }; // Initial position as a percentage of the map
+
+        function submitRequest() {
+            const requestId = document.getElementById('requestIdInput').value;
+
+            // In a real application, you would fetch the engineer's location based on the request ID from a server.
+            // For simplicity, we are using dummy data here.
+            const newX = Math.random() * 100; // Simulating a new location
+            const newY = Math.random() * 100;
+            currentLocation = { x: newX, y: newY };
+            updateLocationData();
+        }
+
+        function updateLocationData() {
+            // Update the marker position and status with the new location
+            const engineerMarker = document.getElementById('engineerMarker');
+            const map = document.getElementById('map');
+
+            const mapWidth = map.clientWidth;
+            const mapHeight = map.clientHeight;
+
+            const markerX = (currentLocation.x * mapWidth) / 100;
+            const markerY = (currentLocation.y * mapHeight) / 100;
+
+            engineerMarker.style.left = `${markerX}px`;
+            engineerMarker.style.top = `${markerY}px`;
+
+            document.getElementById("currentLocation").innerText = `(${currentLocation.x.toFixed(2)}, ${currentLocation.y.toFixed(2)})`;
+        }
+    </script>
+</body>
+</html>
